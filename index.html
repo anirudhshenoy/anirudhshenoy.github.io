@@ -47,7 +47,7 @@
     var el= document.getElementsByClassName("fill");
     //console.log(el)
     el[0].setAttribute("style", "height: "+document.documentElement.scrollHeight + "px;");
-    client = new Paho.MQTT.Client("broker.mqttdashboard.com", 8000, "client1771");
+    client = new Paho.MQTT.Client("test.mosquitto.org", 8081, "client1771");
 
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
@@ -66,7 +66,7 @@
         var el= document.getElementById("connStatus");
         el.innerHTML= "Connected!";
 
-        client.subscribe("LED");
+        client.subscribe("LED2x22");
     //    message = new Paho.MQTT.Message("ON");
     //    message.destinationName = "LED";
      //   client.send(message);
@@ -74,7 +74,7 @@
 
     function sendMessage(cmd){
         message = new Paho.MQTT.Message(cmd);
-        message.destinationName = "LED";
+        message.destinationName = "LED2x22";
         client.send(message);
     }
 
