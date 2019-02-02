@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>webpack starterkit</title>
+</head>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
+    crossorigin="anonymous"></script>
+
+<style>
+    .jumbotron{
+        background-color:orange;
+    }
+
+</style>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="lg-4 text-center"><h4 id="connStatus">Not Connected</h4></div>
+            </div>
+        </div>
+        <div class="container fill">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-sm-12 col-lg-4 text-center"><button class="btn btn-danger" onClick="sendMessage('ON')"><h4 class="display-3">ON</h4></button></div>
+                <div class="col-sm-12 col-lg-4 text-center"><button class="btn btn-danger" onClick="sendMessage('OFF')"><h4 class="display-3">OFF</h4></button></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    // Create a client instance
+
+    //Using the HiveMQ public Broker, with a random client Id
+    // Create a client instance
+   // console.log($(document).height());
+    var el= document.getElementsByClassName("fill");
+    //console.log(el)
+    el[0].setAttribute("style", "height: "+$(document).height() + "px;");
+    client = new Paho.MQTT.Client("broker.mqttdashboard.com", 8000, "client1771");
+
+    // set callback handlers
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+
+    // connect the client
+    client.connect({
+        onSuccess: onConnect
+    });
+
+    // called when the client connects
+    function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        console.log("onConnect");
+        var el= document.getElementById("connStatus");
+        el.innerHTML= "Connected!";
+
+        client.subscribe("LED");
+    //    message = new Paho.MQTT.Message("ON");
+    //    message.destinationName = "LED";
+     //   client.send(message);
+    }
+
+    function sendMessage(cmd){
+        message = new Paho.MQTT.Message(cmd);
+        message.destinationName = "LED";
+        client.send(message);
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+            console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+        console.log("onMessageArrived:" + message.payloadString);
+    }
+</script>
+
+</html>
