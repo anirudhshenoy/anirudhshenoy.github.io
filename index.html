@@ -8,7 +8,6 @@
 </head>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
     crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
@@ -47,7 +46,7 @@
    // console.log($(document).height());
     var el= document.getElementsByClassName("fill");
     //console.log(el)
-    el[0].setAttribute("style", "height: "+$(document).height() + "px;");
+    el[0].setAttribute("style", "height: "+document.documentElement.scrollHeight + "px;");
     client = new Paho.MQTT.Client("broker.mqttdashboard.com", 8000, "client1771");
 
     // set callback handlers
