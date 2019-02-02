@@ -55,7 +55,8 @@
 
     // connect the client
     client.connect({
-        onSuccess: onConnect
+        onSuccess: onConnect,
+        useSSL:true
     });
 
     // called when the client connects
