@@ -1,0 +1,406 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #7FDBFF;
+    color:#111111;
+}
+
+.flex-container {
+    clear: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin:10px 0;
+}
+
+.visible{
+    display:inline-block !important;
+}
+
+
+
+.forecast-card {
+    width: 250px;
+    height: 200px;
+    background-color: #fefefe;
+    margin: 2px;
+    box-shadow: 2px 2px 10px 2px #aaa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forecast-card-title {
+    width: 120px;
+    height: 40px;
+    margin-top:15px;
+    text-align: center;
+    font-size:30px;
+}
+
+.forecast-card-icon {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size:50px;
+    margin-top:-20px;
+
+}
+
+.forecast-card-temperature {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.current-card-container {
+    display: flex;
+    justify-content:center;
+}
+
+
+.current-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.current-card-details {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items:center;
+    padding: 0 0px;
+}
+
+#current-card-temperature,
+#current-card-humidity {
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: left;
+    margin: 0 10px;
+}
+
+.current-card-description {
+    margin: 0 5px;
+    font-size: 2rem;
+    font-weight: 200;
+}
+
+.current-card-title {
+    width: 100%;
+    margin: 5px;
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.sky-overflow {
+    display:none;
+    position: relative;
+    z-index: -9999;
+    height: 300px;
+    width: 100%;
+    background-color: transparent;
+    overflow: hidden;
+    margin: 50px 0;
+}
+
+@media (min-width:768px){
+    .sky-overflow{
+        width:768px;
+    }
+    .current-card-container {
+        justify-content: left;
+        margin: 10px 250px;
+
+    }
+
+}
+
+.sun {
+    background-color: orange;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
+
+.sun-rays {
+    display: block;
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    height: 35px;
+    width: 5px;
+    background-color: orange;
+    box-shadow: 0px 160px orange;
+    transform-origin: 50% 100px;
+    animation: shine 20s ease infinite;
+}
+
+.sun-rays:after,
+.sun-rays:before {
+    content: '';
+    display: block;
+    height: 35px;
+    width: 5px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: rotate(60deg);
+    transform-origin: 50% 100px;
+    background-color: orange;
+    box-shadow: 0px 160px orange;
+}
+
+.sun-rays:after {
+    transform: rotate(120deg);
+}
+
+.cloud {
+    background-color: #fefefe;
+    width: 200px;
+    height: 80px;
+    border-radius: 50px;
+    box-shadow: 2px 2px 10px 0 #AAA;
+    position: relative;
+    top: 40%;
+    left: 10%;
+}
+
+.circles {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fefefe;
+    position: absolute;
+    top: -50px;
+    left: 35px;
+}
+
+.circles:after {
+    content: '';
+    position: absolute;
+    background-color: #fefefe;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    top: 30px;
+    left: 70px;
+}
+
+.cloud.animate {
+    top: 30%;
+    left: 30%;
+    animation: move-cloud 20s ease-in infinite;
+
+}
+
+
+.cloud-small {
+    position: relative;
+    top: -10%;
+    bottom: 0;
+    width: 100px;
+    height: 40px;
+    background: #aaa;
+    animation: move-cloud 10s linear infinite;
+    z-index: -9997;
+}
+
+.circles-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #aaa;
+    position: absolute;
+    top: -30px;
+    left: 20px;
+}
+
+.circles-small:after {
+    content: '';
+    position: absolute;
+    background-color: #aaa;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 20px;
+    left: 40px;
+}
+
+
+.lightning {
+    width: 80px;
+    height: 80px;
+    background-color: transparent;
+    position: absolute;
+    left: 60px;
+    top: 50px;
+}
+
+.bolt {
+    color: orange;
+    animation: flash 1s linear infinite;
+
+}
+
+.bolt:before,
+.bolt:after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+
+
+    border-top: 2.5em solid transparent;
+    border-right: 1.5em solid;
+    transform: skewX(-10deg);
+}
+
+.bolt:after {
+    margin-top: 1.5em;
+    margin-left: 1em;
+    border-top: 0em solid transparent;
+    border-right: 0em solid;
+    border-bottom: 2.5em solid transparent;
+    border-left: 1.5em solid;
+}
+
+.bolt:nth-child(2) {
+    position: relative;
+    transform: scale(0.5);
+    top: 40px;
+    left: 20px;
+    background-color: red;
+}
+
+
+.raindrop {
+    width: 20px;
+    height: 20px;
+    background-color: #80c5de;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+    transform: rotateZ(-45deg);
+    z-index: -9999;
+    animation: move-rain 5s linear infinite;
+}
+
+.snow {
+    font-size: 40px;
+    position: absolute;
+    margin-top: -25px;
+    top: 60px;
+    left: 20px;
+    color: #fefefe;
+    z-index: -9999;
+
+    animation: move-snow 10s linear infinite;
+
+
+}
+
+.delay-1 {
+    left: 155px;
+    animation-delay: 1s;
+}
+
+.delay-3 {
+    left: 70px;
+    animation-delay: 5s;
+}
+
+.delay-2 {
+    left: 110px;
+    animation-delay: 2s;
+}
+
+
+/* Animations */
+
+@keyframes flash {
+    45% {
+
+        opacity: 0.5;
+    }
+
+    50% {
+        color: yellow;
+        opacity: 1;
+    }
+
+    55% {
+
+        opacity: 0.5;
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(359deg);
+        opacity: 0;
+    }
+}
+
+@keyframes move-cloud {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+
+
+@keyframes spin {
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes move-rain {
+    0% {
+        opacity: 1;
+        top: 60px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 200px;
+    }
+}
+
+@keyframes move-snow {
+    0% {
+        opacity: 1;
+        top: 60px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 250px;
+        transform: rotate(359deg);
+    }
+}
