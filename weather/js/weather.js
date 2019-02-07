@@ -7,7 +7,7 @@ function initialize() {
 }
 
 function fetchData() {
-    var server = 'http://api.openweathermap.org/data/2.5/forecast?q=bangalore&units=metric&appID=53a094ad661c44960016eaada195a251';
+    var server = 'https://api.openweathermap.org/data/2.5/forecast?q=bangalore&units=metric&appID=53a094ad661c44960016eaada195a251';
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
